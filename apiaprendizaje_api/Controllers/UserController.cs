@@ -49,7 +49,9 @@ namespace apiaprendizaje_api.Controllers
             {
                 return StatusCode(StatusCodes.Status500InternalServerError);
             }
-            userDto.Id = userDto.Id;
+            userDto.Id = UserStore.userList.OrderByDescending(v => v.Id).FirstOrDefault().Id + 1;
+            UserStore.userList.Add(userDto);
+            return Ok(userDto);
         }
     }
 }
