@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\apiaprendizaje_api.props" />
+</Project>
