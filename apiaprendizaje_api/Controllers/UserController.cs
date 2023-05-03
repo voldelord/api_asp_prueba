@@ -2,6 +2,7 @@
 using apiaprendizaje_api.Models;
 using apiaprendizaje_api.Models.Dto;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
 
@@ -81,6 +82,25 @@ namespace apiaprendizaje_api.Controllers
             }
 
             UserStore.userList.Remove(user);
+
+            return NoContent();
+        }
+        [HttpPut("{id: int}")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public IActionResult UpdateUser(int id , [FromBody] UserDto userDto)
+        {
+
+            if (userDto == null || id! = userDto.Id)
+            {
+                return BadRequest();
+            }
+            var user = UserStore.userList.FirstOrDefault(v => v.Id == id);
+           
+            user.Name = userDto.Name;
+            user.Role = userDto.Role;
+            user.Email = userDto.Email;
+
 
             return NoContent();
         }
