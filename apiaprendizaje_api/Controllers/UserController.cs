@@ -85,13 +85,14 @@ namespace apiaprendizaje_api.Controllers
 
             return NoContent();
         }
-        [HttpPut("{id: int}")]
+        
+        [HttpPut("{id}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public IActionResult UpdateUser(int id , [FromBody] UserDto userDto)
         {
 
-            if (userDto == null || id! = userDto.Id)
+            if (userDto == null || id != userDto.Id)
             {
                 return BadRequest();
             }
